@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+img.c {
+ vertical-align: middle;
+ height: 100px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: DodgerBlue;
+}
+
+body {
+  background: url("{{url_for('static', filename='ships.gif')}}") no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+}
+
+.styled-select select {
+   background: transparent;
+   width: 268px;
+   padding: 8px 20px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 8px;
+   height: 34px;
+   -webkit-appearance: none;
+   }
+.styled-select {
+   width: 240px;
+   height: 34px;
+   margin-bottom: 10px;
+   border-radius: 8px;
+   overflow: hidden;
+      color = white;
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat right #ddd;
+   border: 1px solid #ccc;
+   background-color: DodgerBlue;
+   }
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+
+}
+
+.btn {
+  border: 2px DodgerBlue;
+  color: white;
+  background-color: DodgerBlue;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom:10px;
+
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+
+}
+
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image_upload_preview').attr('src', e.target.result);
+
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+s
+
+</script>
+<script>
+$(document).ready(function(){
+    $("#inputFile").change(function () {
+        readURL(this);
+    });
+});
+</script>
+
+</head>
+<body>
+<img class="c" id="image_upload_preview" src="http://placehold.it/100x100" alt="your image" />
+
+<form method="post" enctype="multipart/form-data">
+   <input type="file" name="upload_image" id="inputFile" class="inputfile" />
+   
+   <label for="inputFile" class="btn">Choose a file</label>
+       <div class="styled-select">
+        <select name="threads">
+            <option value="1">Slow</option>
+            <option value="3">Medium</option>
+            <option value="5">Fast</option>
+        </select>
+    </div>
+
+    <div class="styled-select">
+        <select name="enlargement">
+            <option value="1">Original Image Size</option>
+            <option value="2">2 x</option>
+            <option value="3">3 x</option>
+            <option value="4">4 x</option>
+            <option value="5">5 x</option>
+            <option value="6">6 x</option>
+            <option value="7">7 x</option>
+            <option value="8">8 x</option>
+        </select>
+    </div>
+
+    <div class="styled-select">
+        <select name="tiles">
+            <option value="8">small tiles (8px)</option>
+            <option value="32">medium (32px)</option>
+            <option value="50">large (50px)</option>
+        </select>
+    </div>
+
+    <div class="styled-select">
+        <select name="variance">
+            <option value="0">No Tile Variance</option>
+            <option value="5">low</option>
+            <option value="10">medium</option>
+            <option value="50">high</option>
+        </select>
+    </div>
+
+    <div class="styled-select">
+        <select name="tile_directory">
+            <option value="0">ASCII Art</option>
+            <option value="1">Korra Screenshots (LAN only)</option>
+        </select>
+    </div>
+
+    <button class="btn" type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
